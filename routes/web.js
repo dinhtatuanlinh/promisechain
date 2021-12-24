@@ -5,8 +5,9 @@ const {
     updateComment,
     deleteComment,
     createUser,
-    polulation
+    usePromiseAllToDelete
 } = require('./../controllers/commentController');
+const {updateCommentConflict} = require('./../controllers/testConflict')
 const user = require('./../schemas/connection').userModel;
 
 let router = express.Router();
@@ -27,6 +28,7 @@ module.exports = () => {
     router.post('/createcomment', (req, res, next)=> createComment(req, res, next) )
     router.get('/read', (req, res, next)=>getComment(req, res, next))
     router.put('/update', (req, res, next)=>updateComment(req, res, next))
-    router.delete('/delete', (req, res, next)=>deleteComment(req, res, next))
+    router.delete('/delete', (req, res, next)=>usePromiseAllToDelete(req, res, next))
+    router.put('/updateconflict', (req, res, next)=>updateCommentConflict(req, res, next))
     return router;
 }
